@@ -20,6 +20,11 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddCors(options=> {
+                options.AddPolicy("EnableCORS", builder => {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().Build();
+                });
+            });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -38,6 +43,8 @@ namespace WebApplication1
             {
                 app.UseExceptionHandler("/Error");
             }
+
+            app.UseCors("EnableCORS");
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
