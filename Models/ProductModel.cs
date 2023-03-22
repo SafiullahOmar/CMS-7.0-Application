@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Models
 {
-    public class ProductViewModel
+    public class ProductModel
     {
         [Key]
         public int ProductId { get; set; }
