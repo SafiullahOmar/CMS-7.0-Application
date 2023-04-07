@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpPost("action")]
+        [HttpPost("[action]")]
         public async Task<ActionResult> Register([FromBody] RegistrationViewModel formdata)
         {
             List<string> Errorlist = new List<string>();
@@ -60,7 +60,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpPost("action")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> login([FromBody]LoginViewModel formdate) {
             
             var user =await _userManager.FindByNameAsync(formdate.UserName);
