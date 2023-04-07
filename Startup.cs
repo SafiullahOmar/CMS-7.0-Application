@@ -70,6 +70,11 @@ namespace WebApplication1
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddAuthorization(options=> {
+                options.AddPolicy("RequiredLogin", policy => policy.RequireRole("Admin", "Customer", "Moderator").RequireAuthenticatedUser()  );
+                options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin").RequireAuthenticatedUser());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

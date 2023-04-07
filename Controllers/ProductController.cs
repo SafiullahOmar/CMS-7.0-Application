@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace WebApplication1.Controllers
 
         // GET api/<ProductController>/5
         [HttpGet("[action]")]
+        [Authorize(Policy = "RequiredLogin")]
         public IActionResult GetProducts()
         {
             
@@ -32,6 +34,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("[action]")]
+        [Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> AddProduct([FromBody] ProductModel formdata) {
             var newProduct = new ProductModel {
                 Name=formdata.Name,
@@ -47,6 +50,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut("[action]")]
+        [Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> UpdateProduct([FromRoute] int id,[FromBody] ProductModel formdata)
         {
 
@@ -71,6 +75,7 @@ namespace WebApplication1.Controllers
 
         }
         [HttpDelete("[action]")]
+        [Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> DeleteProduct([FromRoute] int id)
         {
             if (!ModelState.IsValid)
