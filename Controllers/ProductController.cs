@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
             return Ok();
         }
 
-        [HttpPut("[action]")]
+        [HttpPut("[action]/{id}")]
         [Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> UpdateProduct([FromRoute] int id,[FromBody] ProductModel formdata)
         {
@@ -74,7 +74,7 @@ namespace WebApplication1.Controllers
 
 
         }
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{id}")]
         [Authorize(Policy = "RequireAdmin")]
         public async Task<IActionResult> DeleteProduct([FromRoute] int id)
         {
